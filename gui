@@ -1,0 +1,146 @@
+# Edit this info for default button so you don't have to type your personal information everytime.
+
+name = "John Smith" # Your full name
+phone = "(555) 555-5555" # your personal phone number
+email = "jsmith@hotmail.com" # your personal email
+
+# packages
+
+from tkinter import *
+import tkinter.messagebox
+from tkinter import Text, Tk
+from ttkthemes import ThemedStyle
+
+from docx import Document
+from docx.shared import Inches
+
+from docx import *
+
+# define functions
+# 1. create function
+
+def create():
+    name1 = str(name.get())
+    phone1 = str(phone.get())
+    email1 = str(email.get())
+    comp1 = str(comp.get())
+    slogan1 = str(slogan.get())
+    buzz11 = str(buzz1.get())
+    buzz21 = str(buzz2.get())
+
+    if len(name1) >= 1:
+        document = Document()
+
+        heading = document.add_heading(name1, 0) 
+        heading.alignment = 1 # allignment 0 for left, 1 for center, 2 right, 3 justify
+
+
+        document.add_paragraph("Dear Hiring Manager,")
+    
+        document.add_paragraph(    
+        "   Thank you for the opportunity to apply for this vital role at "+ comp1 + ". After reviewing"
+        " your job description, it is clear that you are looking for a candidate that is extremely familiar"
+        " with " + buzz11 + " and can exhibit these skills confidently. Given these"
+        " requirements, I am certain that I have the necessary skills to successfully do the job adeptly and"
+        " perform above expectations.")
+ 
+        document.add_paragraph(    
+        "   I am a detail-oriented college student (M.S. in Data Science) currently attending Clemson"
+        " University. During my academic career, I also managed to gain 5 years of healthcare" 
+        " and department oversight experience. I had the privilege of working for major healthcare facilities in" 
+        " a director role, where I learned valuable professional skills such as customer relations, patient"
+        " safety, and public administration. In both my academic and professional life, I have been"
+        " consistently praised as very efficient by my professors and peers. Whether working on academic,"
+        " extracurricular, or professional projects, I apply proven analytical, communication, and" 
+        " organizational skills, which I hope to leverage into this vital role at " + comp1 +".")
+ 
+        document.add_paragraph(    
+        "   I believe "+ comp1 + " is a good fit for me as "+ comp1 + "'s slogan, " + slogan1 + " aligns with my own"
+        " philosophy in doing right by others. It is my belief that with my expanding knowledge and"
+        " growth in areas such as " + buzz21 + " that I could contribute to the continuation of " + comp1 + "'s"
+        " growing success and diversity.")
+    
+        document.add_paragraph(
+        "   After reviewing my resume, I hope you will agree that I am the type of competent and" 
+        " competitive candidate you are looking for. I look forward to elaborating on how my specific"
+        " skills and abilities will benefit your organization. Please contact me at " + phone1 + " or via"
+        " email at " + email1 + " to arrange for a convenient meeting time.")
+
+        document.add_paragraph(   
+        "Thank you for your consideration, and I look forward to hearing from you soon.")
+            
+        document.add_paragraph("")
+
+        document.add_paragraph("Sincerely,")
+
+        document.add_paragraph(name1)                              
+
+        document.save('demo.docx')
+                
+    else:
+        print("Improper input.")
+
+# 2. Quick view
+
+#def view():
+    #document = Document('demo.docx')
+    #for line, p in enumerate(document.paragraphs):
+       # a = print(p.text)
+       # view.insert(0, a)
+
+# 3. Default so you don't have to enter your info everytime
+def default():
+    name3 = "Craig Fick" 
+    phone3 = "(386) 478-9454" 
+    email3 = "csfick@hotmail.com" 
+    name.insert(0,name3)
+    phone.insert(0,phone3)
+    email.insert(0,email3)
+        
+# layout of gui
+
+main = Tk()
+main.geometry("1000x300")
+main.configure(bg='gray90')
+main.title("UniqCV")
+
+# labels
+
+Label(main, text = "Name: (ex. John Smith)").grid(row=1)
+Label(main, text = "Phone: (ex. (555) 555-5555)").grid(row=2)
+Label(main, text = "Email: (ex. jsmith@email.com").grid(row=3)
+Label(main, text = "Company: (ex. Google)").grid(row=4)
+Label(main, text = "Slogan: (ex. \"Don\'t be evil. \")").grid(row=5)
+Label(main, text = "Buzzwords 1: (ex. both R and Python)").grid(row=6)
+Label(main, text = "Buzzwords 2: (ex. machine learning, cloud networking, and python)").grid(row=7)
+
+# enter text
+
+name = Entry(main, width = 90)
+phone = Entry(main, width = 90)
+email = Entry(main, width = 90)
+comp = Entry(main, width = 90)
+slogan = Entry(main, width = 90)
+buzz1 = Entry(main, width = 90)
+buzz2 = Entry(main, width = 90)
+# view = Entry(main, width = 90)
+
+# location of features
+name.grid(row=1, column=1)
+phone.grid(row=2, column=1)
+email.grid(row=3, column=1)
+comp.grid(row=4, column=1)
+slogan.grid(row=5, column=1)
+buzz1.grid(row=6, column=1)
+buzz2.grid(row=7, column=1)
+# view.grid(row=11, column=0)
+
+
+# buttons
+
+Button(main, text='Create CV', command=create).grid(row=9, column=0, sticky = W, pady=4)
+# Button(main, text='Preview CV (not working)', command=view2).grid(row=9, column=2, sticky=W, pady=4) 
+Button(main, text='Default', command=default).grid(row=9, column=1, sticky=W, pady=4)
+        
+
+mainloop()
